@@ -1,0 +1,14 @@
+2025/02/07-14:52:57.626 7d10 Reusing MANIFEST C:\Users\ThomasSmith\Documents\GitHub\Auto-stock-whatsapp\profile\wpp\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/02/07-14:52:57.626 7d10 Recovering log #184
+2025/02/07-14:52:57.627 7d10 Reusing old log C:\Users\ThomasSmith\Documents\GitHub\Auto-stock-whatsapp\profile\wpp\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000184.log 
+2025/02/07-14:52:57.627 7d10 Delete type=2 #182
+2025/02/07-14:52:57.627 7d10 Delete type=2 #187
+2025/02/07-14:52:58.019 5dd4 Manual compaction at level-0 from '\x005\x00\x00\x00' @ 72057594037927935 : 1 .. '\x006\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/02/07-14:52:59.752 5bec Compacting 1@1 + 2@2 files
+2025/02/07-14:52:59.810 5bec Generated table #188@1: 33508 keys, 2194621 bytes
+2025/02/07-14:52:59.879 5bec Generated table #189@1: 55883 keys, 2129753 bytes
+2025/02/07-14:52:59.879 5bec Compacted 1@1 + 2@2 files => 4324374 bytes
+2025/02/07-14:52:59.882 5bec compacted to: files[ 0 0 2 0 0 0 0 ]
+2025/02/07-14:52:59.882 5bec Delete type=2 #178
+2025/02/07-14:52:59.882 5bec Delete type=2 #179
+2025/02/07-14:52:59.882 5bec Delete type=2 #186
