@@ -1,46 +1,106 @@
-# Selenium imports
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
+import send_message as sm
+from datetime import date
 
-# Misc imports
-from time import sleep
-import os
+def get_current_date():
+    
+    today_date = date.today()
+    
+    day = today_date.day
+    month = today_date.month
+    year = today_date.year
+    weekday = today_date.weekday()
+    month_name = ""
+    date_suffix = ""
+    
+    match weekday:
+        case 0:
+            weekday = 'Monday'
+        case 1:
+            weekday = 'Tuesday'
+        case 2:
+            weekday = 'Wednesday'
+        case 3:
+            weekday = 'Thursday'
+        case 4:
+            weekday = 'Friday'
+        case 5:
+            weekday = 'Saturday'
+        case 6:
+            weekday = 'Sunday'
+            
+    match month:
+        case 1:
+            month_name = "January"
+        case 2:
+            month_name = "February"
+        case 3:
+            month_name = "March"
+        case 4:
+            month_name = "April"
+        case 5:
+            month_name = "May"
+        case 6:
+            month_name = "June"
+        case 7:
+            month_name = "July"
+        case 8:
+            month_name = "August"
+        case 9:
+            month_name = "September"
+        case 10:
+            month_name = "October"
+        case 11:
+            month_name = "November"
+        case 12:
+            month_name = "December"
+            
+    match str(day):
+        case 1:
+            date_suffix = "st"
+        case 2:
+            date_suffix = "nd"
+        case 3:
+            date_suffix = "rd"
+        case _:
+            date_suffix = "th"
+            
+        
+    
+    return day, month, year, weekday, month_name, date_suffix
 
+def create_message():
+    '''
+    Function to create messages before sending them to Whatapp client
+    
+    Set blank lines to the ~ character
+    '''
+    
+    day, month, year, weekday, month_name, date_suffix = get_current_date()
+    
+    template = """
+    {3}, {0}{4} {1} {2}
+    __________________
+    """.format(day, month_name, year, weekday, date_suffix)
+    
+    
+    message = """
+    This is a headless test message!
+    This is line 2 of the headless message!!
+    ~
+    This is a third line
+    """
+    
+    return template+"~"+message
+    
 
 def main():
-
-    message = "This is a headless test message!"
-
-    chrome_options = Options()
-    chrome_options.add_argument("--headless=new")
-
-    dir_path = os.getcwd()
-    profile = os.path.join(dir_path, "profile", "wpp")
-
-    chrome_options.add_argument(r"user-data-dir={}".format(profile))
-    driver = webdriver.Chrome(options=chrome_options)
-
-    driver.get("https://web.whatsapp.com/")
-    sleep(5)
-    driver.find_element(
-        By.XPATH,
-        '//*[@id="pane-side"]/div[1]/div/div/div[1]/div/div/div/div[2]/div[1]/div[1]/div/span[1]',
-    ).click()
-    driver.find_element(
-        By.XPATH,
-        '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[1]',
-    ).send_keys(message)
-    driver.find_element(
-        By.XPATH,
-        '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[1]',
-    ).send_keys(Keys.RETURN)
-
-    sleep(3)
-    driver.close()
-
+    
+    message = create_message()
+    
+    # print(message)
+    
+    client = sm.whatsapp_client(headless=True)
+    client.send_message(message=message)
 
 if __name__ == "__main__":
     main()
